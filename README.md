@@ -28,6 +28,8 @@ let songs = try await APIClient.shared!.fetchSongs()
 ```
 
 ## Notes
+* This library is not complete.
+	
 * Navidrome's API is undocumented and potentially unstable.
   This means it can change at any time and could break this
   library.
