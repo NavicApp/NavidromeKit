@@ -14,15 +14,12 @@ struct AuthenticatedTests {
 	let client: APIClient
 	
 	init() async throws {
-		let instanceURL = URL(string: "https://demo.navidrome.org/")!
-		
 		let authContext = try await APIAuthenticator.createSession(
-			instanceURL: instanceURL,
+			instanceURL: URL(string: "https://demo.navidrome.org/")!,
 			username: "demo",
 			password: "demo"
 		)
-		
-		self.client = APIClient(instanceURL: instanceURL, authContext: authContext)
+		self.client = APIClient(authContext: authContext)
 	}
 	
 	@Test

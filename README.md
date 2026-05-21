@@ -10,17 +10,13 @@ More usage examples can be seen in the
 ```swift
 import NavidromeKit
 
-let instanceURL = URL(string: "https://demo.navidrome.org/")!
 let authContext = try await APIAuthenticator.createSession(
-	instanceURL: instanceURL,
+	instanceURL: URL(string: "https://demo.navidrome.org/")!,
 	username: "demo",
 	password: "demo"
 )
 
-APIClient.shared = APIClient(
-	instanceURL: instanceURL,
-	authContext: authContext
-)
+APIClient.shared = APIClient(authContext: authContext)
 
 // Serialise the authContext and store it in the keychain, then
 // when your app starts, you can restore the context and set the

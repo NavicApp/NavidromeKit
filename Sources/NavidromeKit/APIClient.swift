@@ -38,7 +38,6 @@ public final class APIClient: Sendable {
 	///   - authContext: Authentication context, created via `APIAuthenticator.createSession`
 	///   - session: An optional `URLSession` to pass
 	public init(
-		instanceURL: URL,
 		authContext: AuthContext,
 		session: URLSession = {
 			let configuration = URLSessionConfiguration.default
@@ -47,7 +46,7 @@ public final class APIClient: Sendable {
 			return session
 		}()
 	) {
-		self.instanceURL = instanceURL
+		self.instanceURL = authContext.instanceURL
 		self.authContext = authContext
 		self.session = session
 	}
