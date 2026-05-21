@@ -4,6 +4,9 @@
 Swift library for Navidrome's undocumented API
 
 ## Example
+More usage examples can be seen in the
+[unit tests.](https://github.com/NavicApp/NavidromeKit/blob/master/Tests/NavidromeKitTests/AuthenticatedTests.swift
+)
 ```swift
 import NavidromeKit
 
@@ -26,7 +29,7 @@ APIClient.shared = APIClient(
 // You can store the client instance however you want, but the
 // simplest way to do so is to set `APIClient.shared`
 
-let songs = try await APIClient.shared!.fetchSongs()
+let songs = try await APIClient.shared!.getSongs()
 ```
 
 ## Notes
@@ -47,10 +50,10 @@ let songs = try await APIClient.shared!.fetchSongs()
   as it was made primarily for personal projects.
 
 ## Licence
-This is under GPLv3. This is to prevent low quality
-software from modifying or distributing it, eg. paid
-app store apps. This is in the spirit of free and
-open source software.
+In the spirit of keeping things open source and free,
+this library is under the GPLv3 licence.
 
-Alternative commercial or permissive licensing is
-available upon request.
+[Learn more about GPLv3 here.](https://choosealicense.com/licenses/gpl-3.0/)
+
+Commercial or permissive licensing is available upon
+request.
