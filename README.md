@@ -10,16 +10,16 @@ More usage examples can be seen in the
 ```swift
 import NavidromeKit
 
-let authContext = try await APIAuthenticator.createSession(
+let apiSession = try await APIAuthenticator.createSession(
 	instanceURL: URL(string: "https://demo.navidrome.org/")!,
 	username: "demo",
 	password: "demo"
 )
 
-APIClient.shared = APIClient(authContext: authContext)
+APIClient.shared = APIClient(apiSession: apiSession)
 
-// Serialise the authContext and store it in the keychain, then
-// when your app starts, you can restore the context and set the
+// Serialise the apiSession and store it in the keychain, then
+// when your app starts, you can restore the session and set the
 // client again
 
 // You can store the client instance however you want, but the

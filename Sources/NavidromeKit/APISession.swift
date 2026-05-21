@@ -1,5 +1,5 @@
 //
-//  AuthContext.swift
+//  APISession.swift
 //  NavidromeKit
 //
 //  Created by flowers on 2026.05.06.
@@ -7,8 +7,7 @@
 
 import Foundation
 
-/// Navidrome authentication context
-public struct AuthContext: Codable, Hashable, Sendable {
+public struct APISession: Codable, Hashable, Sendable {
 	public let token: String
 	public let id: String
 	public let isAdmin: Bool

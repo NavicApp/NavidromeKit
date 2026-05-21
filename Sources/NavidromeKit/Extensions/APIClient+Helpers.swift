@@ -14,7 +14,7 @@ internal extension APIClient {
 		path: String,
 		queryItems: [URLQueryItem] = []
 	) throws -> URL {
-		var components = URLComponents(url: instanceURL.appendingPathComponent(path), resolvingAgainstBaseURL: false)
+		var components = URLComponents(url: apiSession.instanceURL.appendingPathComponent(path), resolvingAgainstBaseURL: false)
 		
 		if !queryItems.isEmpty {
 			components?.queryItems = queryItems
@@ -34,7 +34,7 @@ internal extension APIClient {
 		
 		var request = URLRequest(url: url)
 		request.httpMethod = method
-		request.setValue("Bearer \(authContext.token)", forHTTPHeaderField: "X-ND-Authorization")
+		request.setValue("Bearer \(apiSession.token)", forHTTPHeaderField: "X-ND-Authorization")
 		
 		return request
 	}
@@ -50,7 +50,7 @@ internal extension APIClient {
 		
 		var request = URLRequest(url: url)
 		request.httpMethod = method
-		request.setValue("Bearer \(authContext.token)", forHTTPHeaderField: "X-ND-Authorization")
+		request.setValue("Bearer \(apiSession.token)", forHTTPHeaderField: "X-ND-Authorization")
 		request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 		
 		do {
@@ -70,7 +70,7 @@ internal extension APIClient {
 		let response: URLResponse
 		
 		do {
-			(data, response) = try await session.data(for: request)
+			(data, response) = try await urlSession.data(for: request)
 		} catch {
 			throw APIError.requestFailed(error)
 		}
@@ -153,9 +153,9 @@ internal extension APIClient {
 	
 	func buildSubsonicParams() -> [URLQueryItem] {
 		[
-			URLQueryItem(name: "u", value: authContext.username),
-			URLQueryItem(name: "s", value: authContext.subsonicSalt),
-			URLQueryItem(name: "t", value: authContext.subsonicToken),
+			URLQueryItem(name: "u", value: apiSession.username),
+			URLQueryItem(name: "s", value: apiSession.subsonicSalt),
+			URLQueryItem(name: "t", value: apiSession.subsonicToken),
 			URLQueryItem(name: "f", value: "json"),
 			URLQueryItem(name: "v", value: "1.16.1"),
 			URLQueryItem(name: "c", value: "NavidromeKit")

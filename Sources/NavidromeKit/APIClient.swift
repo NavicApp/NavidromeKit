@@ -11,9 +11,8 @@ import Foundation
 public final class APIClient: Sendable {
 	@MainActor public static var shared: APIClient?
 	
-	public let instanceURL: URL
-	internal let authContext: AuthContext
-	internal let session: URLSession
+	internal let apiSession: APISession
+	internal let urlSession: URLSession
 	
 	internal let decoder: JSONDecoder = {
 #warning("this date encoding loves to fail for some reason")
@@ -32,22 +31,20 @@ public final class APIClient: Sendable {
 		return encoder
 	}()
 	
-	/// Instantiate a client given an `AuthContext` and instance `URL`
+	/// Instantiate a client given an `APISession` and instance `URL`
 	/// - Parameters:
-	///   - instanceURL: The same instance `URL` that was used for creating the `AuthContext`.
-	///   - authContext: Authentication context, created via `APIAuthenticator.createSession`
+	///   - apiSession: API session, created via `APIAuthenticator.createSession`
 	///   - session: An optional `URLSession` to pass
 	public init(
-		authContext: AuthContext,
-		session: URLSession = {
+		apiSession: APISession,
+		urlSession: URLSession = {
 			let configuration = URLSessionConfiguration.default
 			configuration.waitsForConnectivity = true
 			let session = URLSession(configuration: configuration)
 			return session
 		}()
 	) {
-		self.instanceURL = authContext.instanceURL
-		self.authContext = authContext
-		self.session = session
+		self.apiSession = apiSession
+		self.urlSession = urlSession
 	}
 }

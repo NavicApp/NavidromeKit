@@ -7,7 +7,7 @@
 
 /// Response from `/auth/login`.
 /// 
-/// You most likely want to use `AuthContext` instead as it wraps
+/// You most likely want to use `Session` instead as it wraps
 /// this response with additional useful fields, such as `instanceURL`
 public struct LoginResponse: Codable, Hashable, Sendable {
 	public let token: String

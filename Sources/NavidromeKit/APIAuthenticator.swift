@@ -15,13 +15,13 @@ public enum APIAuthenticator {
 	///   - username: The username
 	///   - password: The password
 	///   - session: An optional `URLSession` to pass
-	/// - Returns: An `AuthContext`, which could be stored in the keychain
+	/// - Returns: An `APISession`, which could be stored in the keychain
     public static func createSession(
 		instanceURL: URL,
 		username: String,
 		password: String,
 		session: URLSession = .shared
-	) async throws -> AuthContext {
+	) async throws -> APISession {
 		let loginURL = instanceURL.appendingPathComponent("auth/login")
 		
 		var request = URLRequest(url: loginURL)
@@ -37,7 +37,7 @@ public enum APIAuthenticator {
 		if httpResponse.statusCode == 401 { throw APIError.unauthorized }
 		guard httpResponse.statusCode == 200 else { throw APIError.serverError(httpResponse.statusCode) }
 		let loginResponse = try JSONDecoder().decode(LoginResponse.self, from: data)
-		return AuthContext(
+		return APISession(
 			loginResponse: loginResponse,
 			password: password,
 			instanceURL: instanceURL
