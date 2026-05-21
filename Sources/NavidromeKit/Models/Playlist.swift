@@ -43,3 +43,48 @@ public struct Playlist: Codable, Identifiable, Hashable, Sendable {
 		case evaluatedAt
 	}
 }
+
+public struct CreatePlaylistPayload: Codable, Hashable, Sendable {
+	public let name: String
+	public let comment: String?
+	public let isPublic: Bool
+	
+	enum CodingKeys: String, CodingKey {
+		case name
+		case comment
+		case isPublic = "public"
+	}
+}
+
+public struct CreatePlaylistResponse: Codable, Identifiable, Hashable, Sendable {
+	public let id: String
+}
+
+public struct UpdatePlaylistPayload: Codable, Identifiable, Hashable, Sendable {
+	public let id: String
+	public let name: String?
+	public let comment: String?
+	public let ownerID: String?
+	public let isPublic: Bool?
+	
+	enum CodingKeys: String, CodingKey {
+		case id
+		case name
+		case comment
+		case ownerID = "ownerId"
+		case isPublic = "public"
+	}
+}
+public typealias UpdatePlaylistResponse = Playlist
+
+public struct AddPlaylistSongsPayload: Codable, Hashable, Sendable {
+	public let songIDs: [String]
+	
+	enum CodingKeys: String, CodingKey {
+		case songIDs = "ids"
+	}
+}
+
+public struct AddPlaylistSongsResponse: Codable, Hashable, Sendable {
+	public let added: Int
+}

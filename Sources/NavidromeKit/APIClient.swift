@@ -23,6 +23,14 @@ public final class APIClient: Sendable {
 		return decoder
 	}()
 	
+	internal let encoder: JSONEncoder = {
+		let dateFormatter = DateFormatter()
+		dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
+		let encoder = JSONEncoder()
+		encoder.dateEncodingStrategy = .formatted(dateFormatter)
+		return encoder
+	}()
+	
 	/// Instantiate a client given an `AuthContext` and instance `URL`
 	/// - Parameters:
 	///   - instanceURL: The same instance `URL` that was used for creating the `AuthContext`.

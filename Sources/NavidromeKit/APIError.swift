@@ -12,6 +12,7 @@ public enum APIError: Error, LocalizedError {
 	case unauthorized
 	case serverError(Int)
 	case decodingError(Error)
+	case encodingError(Error)
 	case requestFailed(Error)
 	
 	public var localizedDescription: String {
@@ -20,6 +21,7 @@ public enum APIError: Error, LocalizedError {
 		case .unauthorized:				"Incorrect username or password."
 		case .serverError(let code):	"The server returned status code \(code)."
 		case .decodingError(let error):	"Decoding error\n\n\(error)"
+		case .encodingError(let error):	"Encoding error\n\n\(error)"
 		case .requestFailed(let error):	error.localizedDescription
 		}
 	}
