@@ -1,4 +1,6 @@
 # NavidromeKit
+[![Test Status](https://img.shields.io/github/actions/workflow/status/NavicApp/NavidromeKit/swift.yml?branch=master&label=tests)](https://github.com/NavicApp/NavidromeKit/actions/workflows/swift.yml)
+
 Swift library for Navidrome's undocumented API
 
 ## Example
