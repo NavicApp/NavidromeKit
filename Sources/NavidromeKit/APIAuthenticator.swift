@@ -36,7 +36,11 @@ public enum APIAuthenticator {
 		guard let httpResponse = response as? HTTPURLResponse else { throw APIError.invalidURL }
 		if httpResponse.statusCode == 401 { throw APIError.unauthorized }
 		guard httpResponse.statusCode == 200 else { throw APIError.serverError(httpResponse.statusCode) }
-		
-		return try JSONDecoder().decode(AuthContext.self, from: data)
+		let loginResponse = try JSONDecoder().decode(LoginResponse.self, from: data)
+		return AuthContext(
+			loginResponse: loginResponse,
+			password: password,
+			instanceURL: instanceURL
+		)
     }
 }
