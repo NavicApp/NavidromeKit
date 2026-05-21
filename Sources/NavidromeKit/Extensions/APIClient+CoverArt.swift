@@ -16,4 +16,6 @@ public extension APIClient {
 		components?.queryItems = query
 		return components?.url
 	}
+	
+	#warning("add a way to get cover art image data directly")
 }

@@ -16,6 +16,7 @@ public final class APIClient: Sendable {
 	internal let session: URLSession
 	
 	internal let decoder: JSONDecoder = {
+#warning("this date encoding loves to fail for some reason")
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
 		let decoder = JSONDecoder()

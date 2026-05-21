@@ -77,6 +77,11 @@ public extension APIClient {
 		)
 	}
 	
+	/// Fetch a song by its ID
+	func getSong(id: String) async throws -> Song {
+		try await get(path: "api/song/\(id)")
+	}
+	
 	/// Remove a list of song IDs from a playlist
 	func deleteSongs(
 		_ songIDs: [String],

@@ -43,4 +43,9 @@ public extension APIClient {
 		
 		return try await get(path: "api/album", queryItems: queryItems)
 	}
+	
+	/// Fetch an album by its ID
+	func getAlbum(id: String) async throws -> Album {
+		try await get(path: "api/album/\(id)")
+	}
 }

@@ -40,6 +40,7 @@ public struct Album: Codable, Identifiable, Hashable, Sendable {
 	public let genre: String
 	public let genres: [Genre]?
 	public let tags: [String: [String]]?
+#warning("implement Participants type")
 	//public let participants: Participants
 	public let missing: Bool
 	public let importedAt: Date

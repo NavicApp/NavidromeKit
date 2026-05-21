@@ -34,6 +34,11 @@ public extension APIClient {
 		return try await get(path: "api/playlist", queryItems: queryItems)
 	}
 	
+	/// Fetch a playlist by its ID
+	func getPlaylist(id: String) async throws -> Playlist {
+		try await get(path: "api/playlist/\(id)")
+	}
+	
 	/// Create a new playlist
 	func createPlaylist(
 		name: String,
