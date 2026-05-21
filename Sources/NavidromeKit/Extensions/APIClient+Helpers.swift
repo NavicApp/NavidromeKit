@@ -66,19 +66,23 @@ internal extension APIClient {
 	private func fetchData(
 		for request: URLRequest
 	) async throws -> Data {
+		let data: Data
+		let response: URLResponse
+		
 		do {
-			let (data, response) = try await session.data(for: request)
-			guard let httpResponse = response as? HTTPURLResponse else { throw APIError.invalidURL }
-			
-			if httpResponse.statusCode == 401 { throw APIError.unauthorized }
-			guard (200...299).contains(httpResponse.statusCode) else {
-				throw APIError.serverError(httpResponse.statusCode)
-			}
-			
-			return data
+			(data, response) = try await session.data(for: request)
 		} catch {
 			throw APIError.requestFailed(error)
 		}
+		
+		guard let httpResponse = response as? HTTPURLResponse else { throw APIError.invalidURL }
+		
+		if httpResponse.statusCode == 401 { throw APIError.unauthorized }
+		guard (200...299).contains(httpResponse.statusCode) else {
+			throw APIError.serverError(httpResponse.statusCode)
+		}
+		
+		return data
 	}
 	
 	/// Fetch decoded data for a request
