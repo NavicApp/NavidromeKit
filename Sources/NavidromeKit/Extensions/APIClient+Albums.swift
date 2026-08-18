@@ -13,6 +13,7 @@ public extension APIClient {
 		range: ClosedRange<Int>? = nil,
 		sort: String? = "name",
 		order: SortOrder = .descending,
+		query: String? = nil,
 		artistID: String? = nil,
 		libraryID: String? = nil,
 		starred: Bool? = nil,
@@ -20,6 +21,10 @@ public extension APIClient {
 		year: Int? = nil
 	) async throws -> [Album] {
 		var queryItems = paginationQuery(range: range, sort: sort, order: order)
+		
+		if let query {
+			queryItems.append(URLQueryItem(name: "name", value: query))
+		}
 		
 		if let artistID {
 			queryItems.append(URLQueryItem(name: "artist_id", value: artistID))

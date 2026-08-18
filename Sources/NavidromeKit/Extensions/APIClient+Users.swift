@@ -5,14 +5,23 @@
 //  Created by flowers on 2026-08-17.
 //
 
+import Foundation
+
 public extension APIClient {
 	/// Fetch users
 	func getUsers(
 		range: ClosedRange<Int>? = nil,
 		sort: String? = "userName",
-		order: SortOrder = .ascending
+		order: SortOrder = .ascending,
+		query: String? = nil
 	) async throws -> [User] {
-		try await get(path: "api/user", queryItems: paginationQuery(range: range, sort: sort, order: order))
+		var queryItems = paginationQuery(range: range, sort: sort, order: order)
+		
+		if let query {
+			queryItems.append(URLQueryItem(name: "name", value: query))
+		}
+		
+		return try await get(path: "api/user", queryItems: queryItems)
 	}
 	
 	/// Fetch a user by their ID
