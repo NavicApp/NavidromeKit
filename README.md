@@ -1,60 +1,46 @@
 # NavidromeKit
 
-[![Tests Status](https://img.shields.io/github/actions/workflow/status/NavicApp/NavidromeKit/tests.yml?branch=master&label=tests)](https://github.com/NavicApp/NavidromeKit/actions/workflows/tests.yml)
-[![Swift Version](https://img.shields.io/badge/swift-6.2-orange)](/Package.swift)
+> [!WARNING]
+> This package, and the API that it uses, is unstable and
+> not finalised. This library was also made only for use
+> with Navic, so do not expect stability, good docs, or
+> any support with using it.
+>
+> **This project is also not under a permissive licence,**
+> basically meaning you can't legally use it in all
+> situations. See the licence section below.
 
-Swift library for Navidrome's undocumented API
+[![Swift Version](https://img.shields.io/badge/Swift-6.2-blue)](/Package.swift)
+![Platforms](https://img.shields.io/badge/Platforms-iOS_|_macOS_|_Linux-blue)
+[![Licence](https://img.shields.io/badge/Licence-GPL--3.0--only-blue)](/LICENCE)
+[![Tests Status](https://img.shields.io/github/actions/workflow/status/NavicApp/NavidromeKit/tests.yml?branch=master&label=Tests)](https://github.com/NavicApp/NavidromeKit/actions/workflows/tests.yml)
 
-## Example
+Swift package for Navidrome's API
 
-More usage examples can be seen in the
-[unit tests.](https://github.com/NavicApp/NavidromeKit/blob/master/Tests/NavidromeKitTests/AuthenticatedTests.swift)
+## Installation
+
+Add this package to your Package.swift, or Xcode project:
 
 ```swift
-import NavidromeKit
-
-let apiSession = try await APIAuthenticator.createSession(
-	instanceURL: URL(string: "https://demo.navidrome.org/")!,
-	username: "demo",
-	password: "demo"
+let package = Package(
+	name: "Example",
+	dependencies: [
+		.package(url: "https://github.com/NavicApp/NavidromeKit", branch: "master")
+	],
+	targets: [
+		.target(name: "Example", dependencies: ["NavidromeKit"])
+	]
 )
-
-APIClient.shared = APIClient(apiSession: apiSession)
-
-// Serialise the apiSession and store it in the keychain, then
-// when your app starts, you can restore the session and set the
-// client again
-
-// You can store the client instance however you want, but the
-// simplest way to do so is to set `APIClient.shared`
-
-let songs = try await APIClient.shared!.getSongs()
 ```
 
-## Notes
-
-- This library is not complete.
-
-- Navidrome's API is undocumented and potentially unstable.
-  This means it can change at any time and could break this
-  library.
-
-- This library is type safe, however, many fields are
-  nullable to reflect the API responses nullability.
-
-    Basic fields such as the artist ID can be nil, meaning
-    your app will have to manually accomodate for them
-    being nil. This is unfortunately unavoidable.
-
-- Some parts of this library may not be documented well,
-  as it was made primarily for personal projects.
+Some usage examples can be seen in the
+[unit tests](/Tests/NavidromeKitTests/AuthenticatedTests.swift).
 
 ## Licence
 
-In the spirit of keeping things open source and free,
-this library is under the GPLv3 licence.
-
-[Learn more about GPLv3 here.](https://choosealicense.com/licenses/gpl-3.0/)
+In the spirit of keeping things free and open source,
+this library is under the [GPLv3 licence](https://choosealicense.com/licenses/gpl-3.0/).
 
 Commercial or permissive licensing is available upon
-request.
+request. Navidrome itself is FOSS, so I think it makes
+sense to be FOSS and encourage being FOSS as well :)
