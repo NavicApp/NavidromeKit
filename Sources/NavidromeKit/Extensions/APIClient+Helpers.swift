@@ -78,6 +78,7 @@ internal extension APIClient {
 		guard let httpResponse = response as? HTTPURLResponse else { throw APIError.invalidURL }
 		
 		if httpResponse.statusCode == 401 { throw APIError.unauthorized }
+		if httpResponse.statusCode == 403 { throw APIError.forbidden }
 		guard (200...299).contains(httpResponse.statusCode) else {
 			throw APIError.serverError(httpResponse.statusCode)
 		}
