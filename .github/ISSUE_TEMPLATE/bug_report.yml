@@ -1,0 +1,32 @@
+name: "🐞 Bug Report"
+description: Report a bug in the library
+labels: ["bug"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Describe your bug
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproducing
+    attributes:
+      label: Reproducing
+      description: Steps to reproduce the behaviour
+
+  - type: input
+    id: Commit
+    attributes:
+      label: Commit
+      description: Commit hash where this issue occurs on
+      placeholder: eg. 8a8605353ee7b15421dcab99457c36db2277874c
+
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Prerequisites
+      options:
+        - label: "I've checked existing issues to see if this already was reported"
+          required: true

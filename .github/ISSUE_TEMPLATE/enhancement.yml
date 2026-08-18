@@ -1,0 +1,19 @@
+name: "🌟 Enhancement"
+description: Suggest a new enhancement for the library
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Describe your enhancement
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Prerequisites
+      options:
+        - label: "I've checked existing issues to see if this already was requested"
+          required: true
