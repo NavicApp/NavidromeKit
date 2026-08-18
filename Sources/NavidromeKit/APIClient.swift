@@ -21,7 +21,16 @@ public final class APIClient: Sendable {
 			let dateString = try container.decode(String.self)
 			let formatter = ISO8601DateFormatter()
 			formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-			return formatter.date(from: dateString)!
+			if let date = formatter.date(from: dateString) {
+				return date
+			} else {
+				formatter.formatOptions = [.withInternetDateTime]
+				if let date = formatter.date(from: dateString) {
+					return date
+				} else {
+					throw DecodingError.dataCorruptedError(in: container, debugDescription: "Invalid date format (\(dateString))")
+				}
+			}
 		})
 		return decoder
 	}()
