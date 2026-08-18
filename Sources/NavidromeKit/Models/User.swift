@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct User: Codable {
+public struct User: Codable, Identifiable, Hashable, Sendable {
 	public let id: String
 	public let userName: String
 	public let name: String
@@ -20,7 +20,7 @@ public struct User: Codable {
 	public let libraries: [Library]
 }
 
-public struct CreateUserPayload: Codable {
+public struct CreateUserPayload: Codable, Hashable, Sendable {
 	public let userName: String
 	public let name: String
 	public let email: String?
@@ -29,7 +29,11 @@ public struct CreateUserPayload: Codable {
 	public let isAdmin: Bool
 }
 
-public struct UpdateUserPayload: Codable {
+public struct CreateUserResponse: Codable, Identifiable, Hashable, Sendable {
+	public let id: String
+}
+
+public struct UpdateUserPayload: Codable, Identifiable, Hashable, Sendable {
 	public let id: String
 	public let userName: String?
 	public let name: String?

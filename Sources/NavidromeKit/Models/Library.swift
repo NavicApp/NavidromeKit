@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Library: Codable {
+public struct Library: Codable, Identifiable, Hashable, Sendable {
 	public let id: Int
 	public let name: String
 	public let path: String
@@ -26,4 +26,20 @@ public struct Library: Codable {
 	public let totalSize: Int?
 	public let totalDuration: Int?
 	public let defaultNewUsers: Bool
+}
+
+public struct CreateLibraryPayload: Codable, Hashable, Sendable {
+	public let name: String
+	public let path: String
+}
+
+public struct CreateLibraryResponse: Codable, Identifiable, Hashable, Sendable {
+	public let id: Int
+}
+
+public struct UpdateLibraryPayload: Codable, Identifiable, Hashable, Sendable {
+	public let id: Int
+	public let name: String?
+	public let path: String?
+	public let defaultNewUsers: Bool?
 }

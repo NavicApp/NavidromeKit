@@ -33,7 +33,7 @@ public extension APIClient {
 		password: String,
 		libraries: [Library]?,
 		isAdmin: Bool = false
-	) async throws -> CreateShareResponse {
+	) async throws -> CreateUserResponse {
 		try await post(path: "api/user", body: CreateUserPayload(
 			userName: userName,
 			name: name,
