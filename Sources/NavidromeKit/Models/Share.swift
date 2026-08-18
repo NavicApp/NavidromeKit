@@ -15,7 +15,7 @@ public struct Share: Codable, Identifiable, Hashable, Sendable {
 	public let downloadable: Bool
 	public let expiresAt: String
 	public let lastVisitedAt: String?
-	public let resourceIDs: String
+	public let resourceID: String
 	public let resourceType: ResourceType
 	public let contents: String
 	public let format: String?
@@ -32,7 +32,7 @@ public struct Share: Codable, Identifiable, Hashable, Sendable {
 		case downloadable
 		case expiresAt
 		case lastVisitedAt
-		case resourceIDs = "resourceIds"
+		case resourceID = "resourceIds"
 		case resourceType
 		case contents
 		case format
@@ -46,13 +46,13 @@ public struct Share: Codable, Identifiable, Hashable, Sendable {
 
 public struct CreateSharePayload: Codable, Hashable, Sendable {
 	public let description: String
-	public let resourceIDs: [String]
+	public let resourceID: String
 	public let downloadable: Bool
 	public let resourceType: ResourceType
 	
 	enum CodingKeys: String, CodingKey {
 		case description
-		case resourceIDs = "resourceIds"
+		case resourceID = "resourceIds"
 		case downloadable
 		case resourceType
 	}

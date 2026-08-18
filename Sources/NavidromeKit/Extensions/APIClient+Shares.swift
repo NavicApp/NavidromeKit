@@ -28,13 +28,13 @@ public extension APIClient {
 	/// Create a share
 	func createShare(
 		description: String = "",
-		resourceIDs: [String],
+		resourceID: String,
 		downloadable: Bool = false,
 		resourceType: ResourceType = .album
 	) async throws -> CreateShareResponse {
 		try await post(path: "api/share", body: CreateSharePayload(
 			description: description,
-			resourceIDs: resourceIDs,
+			resourceID: resourceID,
 			downloadable: downloadable,
 			resourceType: resourceType
 		))
