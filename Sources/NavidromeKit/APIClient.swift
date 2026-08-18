@@ -52,6 +52,8 @@ public final class APIClient: Sendable {
 		urlSession: URLSession = {
 			let configuration = URLSessionConfiguration.default
 			configuration.waitsForConnectivity = true
+			configuration.timeoutIntervalForRequest = 16
+			configuration.timeoutIntervalForResource = 16
 			let session = URLSession(configuration: configuration)
 			return session
 		}()
