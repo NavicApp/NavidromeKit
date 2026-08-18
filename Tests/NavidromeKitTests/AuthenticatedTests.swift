@@ -32,6 +32,7 @@ struct AuthenticatedTests {
 		_ = try await client.getPlaylist(id: playlist.id)
 		_ = try await client.getSong(id: song.id)
 		_ = try await client.getArtist(id: artist.id)
+		_ = try await client.getArtistInfo(id: artist.id)
 		_ = try await client.getAlbum(id: album.id)
 		_ = try await client.getShare(id: share.id)
 	}

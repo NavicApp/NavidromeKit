@@ -43,4 +43,15 @@ public extension APIClient {
 	func getArtist(id: String) async throws -> Artist {
 		try await get(path: "api/artist/\(id)")
 	}
+	
+	/// Fetch an artist's info by their ID
+	func getArtistInfo(id: String) async throws -> ArtistInfo {
+		var queryItems = buildSubsonicParams()
+		queryItems.append(URLQueryItem(name: "id", value: id))
+		let response: SubsonicResponse = try await get(path: "rest/getArtistInfo", queryItems: queryItems)
+		guard let artistInfo = response.body.artistInfo else {
+			throw APIError.subsonicError(response)
+		}
+		return artistInfo
+	}
 }
