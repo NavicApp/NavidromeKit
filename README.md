@@ -1,12 +1,15 @@
 # NavidromeKit
-[![Test Status](https://img.shields.io/github/actions/workflow/status/NavicApp/NavidromeKit/swift.yml?branch=master&label=tests)](https://github.com/NavicApp/NavidromeKit/actions/workflows/swift.yml)
+
+[![Tests Status](https://img.shields.io/github/actions/workflow/status/NavicApp/NavidromeKit/tests.yml?branch=master&label=tests)](https://github.com/NavicApp/NavidromeKit/actions/workflows/tests.yml)
+[![Swift Version](https://img.shields.io/badge/swift-6.2-orange)](/Package.swift)
 
 Swift library for Navidrome's undocumented API
 
 ## Example
+
 More usage examples can be seen in the
-[unit tests.](https://github.com/NavicApp/NavidromeKit/blob/master/Tests/NavidromeKitTests/AuthenticatedTests.swift
-)
+[unit tests.](https://github.com/NavicApp/NavidromeKit/blob/master/Tests/NavidromeKitTests/AuthenticatedTests.swift)
+
 ```swift
 import NavidromeKit
 
@@ -29,23 +32,25 @@ let songs = try await APIClient.shared!.getSongs()
 ```
 
 ## Notes
-* This library is not complete.
 
-* Navidrome's API is undocumented and potentially unstable.
+- This library is not complete.
+
+- Navidrome's API is undocumented and potentially unstable.
   This means it can change at any time and could break this
   library.
 
-* This library is type safe, however, many fields are
+- This library is type safe, however, many fields are
   nullable to reflect the API responses nullability.
-  
-  Basic fields such as the artist ID can be nil, meaning
-  your app will have to manually accomodate for them
-  being nil. This is unfortunately unavoidable.
 
-* Some parts of this library may not be documented well,
+    Basic fields such as the artist ID can be nil, meaning
+    your app will have to manually accomodate for them
+    being nil. This is unfortunately unavoidable.
+
+- Some parts of this library may not be documented well,
   as it was made primarily for personal projects.
 
 ## Licence
+
 In the spirit of keeping things open source and free,
 this library is under the GPLv3 licence.
 
