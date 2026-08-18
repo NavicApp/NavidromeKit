@@ -15,11 +15,23 @@ public final class APIClient: Sendable {
 	internal let urlSession: URLSession
 	
 	internal let decoder: JSONDecoder = {
-#warning("this date encoding loves to fail for some reason")
-		let dateFormatter = DateFormatter()
-		dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
 		let decoder = JSONDecoder()
-		decoder.dateDecodingStrategy = .formatted(dateFormatter)
+		decoder.dateDecodingStrategy = .custom({ decoder in
+			let container = try decoder.singleValueContainer()
+			let dateString = try container.decode(String.self)
+			let formatter = ISO8601DateFormatter()
+			formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+			if let date = formatter.date(from: dateString) {
+				return date
+			} else {
+				formatter.formatOptions = [.withInternetDateTime]
+				if let date = formatter.date(from: dateString) {
+					return date
+				} else {
+					throw DecodingError.dataCorruptedError(in: container, debugDescription: "Invalid date format (\(dateString))")
+				}
+			}
+		})
 		return decoder
 	}()
 	

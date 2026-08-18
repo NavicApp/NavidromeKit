@@ -41,7 +41,7 @@ public struct Song: Codable, Identifiable, Hashable, Sendable {
 	public let duration: Double
 	public let bitRate: Int
 	public let sampleRate: Int
-	public let bitDepth: Int
+	public let bitDepth: Int?
 	public let channels: Int
 	public let codec: String
 	public let genre: String
