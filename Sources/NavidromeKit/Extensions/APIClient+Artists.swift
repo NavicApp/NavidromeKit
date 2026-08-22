@@ -11,14 +11,13 @@ public extension APIClient {
 	/// Fetch artists, optionally with a criteria
 	func getArtists(
 		range: ClosedRange<Int>? = nil,
-		sort: String? = "name",
-		order: SortOrder = .descending,
+		sort: SortDescriptors<ArtistSortField>? = [.name],
 		libraryID: String? = nil,
 		starred: Bool? = nil,
 		role: String? = nil, // TODO: role enum
 		query: String? = nil
 	) async throws -> [Artist] {
-		var queryItems = paginationQuery(range: range, sort: sort, order: order)
+		var queryItems = paginationQuery(range: range, sort: sort)
 		
 		if let libraryID {
 			queryItems.append(URLQueryItem(name: "library_id", value: libraryID))

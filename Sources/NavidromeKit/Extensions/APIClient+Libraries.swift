@@ -11,11 +11,10 @@ public extension APIClient {
 	/// Fetch libraries
 	func getLibraries(
 		range: ClosedRange<Int>? = nil,
-		sort: String? = "created",
-		order: SortOrder = .descending,
+		sort: SortDescriptors<LibrarySortField>? = [.created],
 		query: String? = nil
 	) async throws -> [Library] {
-		var queryItems = paginationQuery(range: range, sort: sort, order: order)
+		var queryItems = paginationQuery(range: range, sort: sort)
 		
 		if let query {
 			queryItems.append(URLQueryItem(name: "name", value: query))

@@ -9,10 +9,9 @@ public extension APIClient {
 	/// Fetch shares
 	func getShares(
 		range: ClosedRange<Int>? = nil,
-		sort: String? = "created",
-		order: SortOrder = .descending
+		sort: SortDescriptors<ShareSortField>? = [.created(order: .descending)]
 	) async throws -> [Share] {
-		try await get(path: "api/share", queryItems: paginationQuery(range: range, sort: sort, order: order))
+		try await get(path: "api/share", queryItems: paginationQuery(range: range, sort: sort))
 	}
 	
 	/// Fetch a share by its ID

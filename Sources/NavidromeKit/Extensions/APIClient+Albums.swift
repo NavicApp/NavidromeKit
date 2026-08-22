@@ -11,8 +11,7 @@ public extension APIClient {
 	/// Fetch albums, optionally with a criteria
 	func getAlbums(
 		range: ClosedRange<Int>? = nil,
-		sort: String? = "name",
-		order: SortOrder = .descending,
+		sort: SortDescriptors<AlbumSortField>? = [.name],
 		query: String? = nil,
 		artistID: String? = nil,
 		libraryID: String? = nil,
@@ -20,7 +19,7 @@ public extension APIClient {
 		compilation: Bool? = nil,
 		year: Int? = nil
 	) async throws -> [Album] {
-		var queryItems = paginationQuery(range: range, sort: sort, order: order)
+		var queryItems = paginationQuery(range: range, sort: sort)
 		
 		if let query {
 			queryItems.append(URLQueryItem(name: "name", value: query))
