@@ -140,10 +140,9 @@ internal extension APIClient {
 
 // MARK: - internal query helpers
 internal extension APIClient {
-	func paginationQuery(range: ClosedRange<Int>?, sort: String?, order: SortOrder) -> [URLQueryItem] {
+	func paginationQuery<Fields: SortFieldRepresentable>(range: ClosedRange<Int>?, sort: SortDescriptors<Fields>?) -> [URLQueryItem] {
 		var items = [
-			URLQueryItem(name: "_sort", value: sort),
-			URLQueryItem(name: "_order", value: order.rawValue)
+			URLQueryItem(name: "_sort", value: sort?.queryValue),
 		]
 		if let range {
 			items.append(URLQueryItem(name: "_start", value: "\(range.lowerBound)"))

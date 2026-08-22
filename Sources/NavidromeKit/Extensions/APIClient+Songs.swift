@@ -11,8 +11,7 @@ public extension APIClient {
 	/// Fetch songs, optionally with a criteria
 	func getSongs(
 		range: ClosedRange<Int>? = nil,
-		sort: String? = nil,
-		order: SortOrder = .descending,
+		sort: SortDescriptors<SongSortField>? = nil,
 		albumID: String? = nil,
 		libraryID: String? = nil,
 		albumArtistID: String? = nil,
@@ -23,7 +22,7 @@ public extension APIClient {
 		year: Int? = nil,
 		query: String? = nil
 	) async throws -> [Song] {
-		var queryItems = paginationQuery(range: range, sort: sort, order: order)
+		var queryItems = paginationQuery(range: range, sort: sort)
 		
 		if let albumID {
 			queryItems.append(URLQueryItem(name: "album_id", value: albumID))
@@ -68,12 +67,11 @@ public extension APIClient {
 	func getSongs(
 		playlistID: String,
 		range: ClosedRange<Int>? = nil,
-		sort: String? = nil,
-		order: SortOrder = .descending
+		sort: SortDescriptors<SongSortField>? = nil,
 	) async throws -> [Song] {
 		try await get(
 			path: "api/playlist/\(playlistID)/tracks",
-			queryItems: paginationQuery(range: range, sort: sort, order: order)
+			queryItems: paginationQuery(range: range, sort: sort)
 		)
 	}
 	

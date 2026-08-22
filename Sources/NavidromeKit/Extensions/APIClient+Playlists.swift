@@ -11,13 +11,12 @@ public extension APIClient {
 	/// Fetch playlists, optionally with a criteria
 	func getPlaylists(
 		range: ClosedRange<Int>? = nil,
-		sort: String? = "name",
-		order: SortOrder = .descending,
+		sort: SortDescriptors<PlaylistSortField>? = [.name],
 		query: String? = nil,
 		ownerID: String? = nil,
 		smart: Bool? = nil
 	) async throws -> [Playlist] {
-		var queryItems = paginationQuery(range: range, sort: sort, order: order)
+		var queryItems = paginationQuery(range: range, sort: sort)
 		
 		if let query {
 			queryItems.append(URLQueryItem(name: "q", value: query))

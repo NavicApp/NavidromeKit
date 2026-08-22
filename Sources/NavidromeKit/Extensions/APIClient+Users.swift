@@ -11,11 +11,10 @@ public extension APIClient {
 	/// Fetch users
 	func getUsers(
 		range: ClosedRange<Int>? = nil,
-		sort: String? = "userName",
-		order: SortOrder = .ascending,
+		sort: SortDescriptors<UserSortField>? = [.userName(order: .ascending)],
 		query: String? = nil
 	) async throws -> [User] {
-		var queryItems = paginationQuery(range: range, sort: sort, order: order)
+		var queryItems = paginationQuery(range: range, sort: sort)
 		
 		if let query {
 			queryItems.append(URLQueryItem(name: "name", value: query))
